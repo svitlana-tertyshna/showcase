@@ -1,0 +1,17 @@
+Your process management project has several interesting aspects and seems to be on the right track.
+And there are some points I would like to mention:
+
+1. The ProcessManager class centralizes the management of processes, allowing you to submit, track, and cancel them.
+This is a good approach as it decouples the task execution from the rest of the application.
+
+2. Including metadata in the SpiritLinkProcess class is a reasonable design choice, as it allows each process to carry the necessary context with it.
+However, as you mentioned, it has led to a large base class.
+
+Suggestions:
+1) Inheritance Issues: Your discomfort with inheritance is valid. It often leads to rigid and hard-to-maintain code.
+As the base class grows, adding new features becomes cumbersome. What if you look at the side of using composition?
+You could create a ProcessContext class that holds the metadata and utility methods, which SpiritLinkProcess can use.
+This will keep the base class lean and focused on the execution logic.
+
+2) Managing child processes using the same ExecutorService as the parent processes is practical to avoid nested ExecutorService instances, which can be resource-intensive.
+However, it is worth adding the ability to configure the size of the thread pool and other parameters through configuration files or DI.
